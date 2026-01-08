@@ -7,8 +7,8 @@ import { Input } from "../components/ui/Input";
 import { BACKEND_URL } from '../config';
 
 export default function Signin() {
-    const usernameRef= useRef<HTMLInputElement>();
-    const passwordRef= useRef<HTMLInputElement>();
+    const usernameRef= useRef<HTMLInputElement>(null);
+    const passwordRef= useRef<HTMLInputElement>(null);
     const navigate=useNavigate();
 
     async function signin(){

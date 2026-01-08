@@ -12,7 +12,12 @@ enum ContentType {
   Twitter = "twitter",
 }
 
-const CreateContentModal = ({ open, onClose }) => {
+interface CreateContentModalProps {
+  open: boolean;
+  onClose: () => void;
+}
+
+const CreateContentModal = ({ open, onClose }:CreateContentModalProps) => {
   const titleRef = useRef<HTMLInputElement>(null);
   const linkRef = useRef<HTMLInputElement>(null);
   const [type, setType] = useState(ContentType.Youtube);
@@ -88,7 +93,7 @@ const CreateContentModal = ({ open, onClose }) => {
                     }
                   `}
                 >
-                  <YoutubeIcon />
+                  <YoutubeIcon size="sm" />
                   YouTube
                 </button>
                 <button
@@ -101,7 +106,7 @@ const CreateContentModal = ({ open, onClose }) => {
                     }
                   `}
                 >
-                  <TwitterIcon />
+                  <TwitterIcon size="sm" />
                   Twitter
                 </button>
               </div>

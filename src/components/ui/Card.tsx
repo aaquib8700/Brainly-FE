@@ -1,5 +1,3 @@
-
-import React from "react";
 import { Shareicon } from "../../icons/Shareicon";
 import YoutubeIcon from "../../icons/YoutubeIcon";
 import TwitterIcon from "../../icons/TwitterIcon";
@@ -34,7 +32,7 @@ const Card = ({ title, link, type, _id }: CardProps) => {
     <div className="rounded-2xl h-fit bg-white/5 border border-white/10 p-4 shadow-sm hover:shadow-md transition p-4">
       <div className="flex items-start justify-between mb-3">
         <div className="flex items-center gap-2 font-medium">
-          {type === "youtube" ? <YoutubeIcon /> : <TwitterIcon />}
+          {type === "youtube" ? <YoutubeIcon size="sm"/> : <TwitterIcon size="sm"/>}
           <span className="text-md truncate">{title}</span>
         </div>
 

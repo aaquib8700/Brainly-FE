@@ -1,4 +1,3 @@
-import React from 'react'
 import { iconsSizeVariants, type IconsProps } from '.'
 
 const YoutubeIcon = (props:IconsProps) => {
