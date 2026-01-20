@@ -3,6 +3,9 @@ import TwitterIcon from '../../icons/TwitterIcon'
 import YoutubeIcon from '../../icons/YoutubeIcon'
 import BrainIcon from '../../icons/BrainIcon'
 import HomeIcon from '../../icons/HomeIcon'
+import InstagramIcon from '../../icons/InstagramIcon'
+import FacebookIcon from '../../icons/FacebookIcon'
+import LinkedinIcon from '../../icons/LinkedinIcon'
 
 const Sidebar = () => {
   return (
@@ -18,6 +21,9 @@ const Sidebar = () => {
           <SidebarItem text='All Content' icon={<HomeIcon size='sm' />}></SidebarItem>
           <SidebarItem text='Youtube' icon={<YoutubeIcon size='sm' />}></SidebarItem>
           <SidebarItem text='Twitter' icon={<TwitterIcon size='sm' />}></SidebarItem>
+          <SidebarItem text='Instagram' icon={<InstagramIcon size='sm' />}></SidebarItem>
+          <SidebarItem text='Facebook' icon={<FacebookIcon size='sm' />}></SidebarItem>
+          <SidebarItem text='LinkedIn' icon={<LinkedinIcon size='sm' />}></SidebarItem>
         </nav>
       </aside>
 

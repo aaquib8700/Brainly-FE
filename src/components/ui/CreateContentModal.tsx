@@ -6,10 +6,16 @@ import { Button } from "./Button";
 import { Input } from "./Input";
 import axios from "axios";
 import { BACKEND_URL } from "../../config";
+import Instagram from "../../icons/InstagramIcon";
+import FacebookIcon from "../../icons/FacebookIcon";
+import LinkedinIcon from "../../icons/LinkedinIcon";
 
 enum ContentType {
   Youtube = "youtube",
   Twitter = "twitter",
+  Instagram = "instagram",
+  Facebook = "facebook",
+  LinkedIn = "linkedin",
 }
 
 interface CreateContentModalProps {
@@ -109,10 +115,50 @@ const CreateContentModal = ({ open, onClose }:CreateContentModalProps) => {
                   <TwitterIcon size="sm" />
                   Twitter
                 </button>
+
+                <button
+                  onClick={() => setType(ContentType.Instagram)}
+                  className={`flex items-center justify-center gap-2 rounded-xl border px-4 py-3 transition
+                    ${
+                      type === ContentType.Instagram
+                        ? "bg-pink-300/10 border-pink-300 text-pink-300"
+                        : "border-white/10 text-gray-400 hover:border-white/20"
+                    }
+                  `}
+                >
+                  <Instagram size="sm" />
+                  Instagram
+                </button>
+
+                <button
+                  onClick={() => setType(ContentType.Facebook)}
+                  className={`flex items-center justify-center gap-2 rounded-xl border px-4 py-3 transition
+                    ${
+                      type === ContentType.Facebook
+                        ? "bg-blue-300/10 border-blue-300 text-blue-300"
+                        : "border-white/10 text-gray-400 hover:border-white/20"
+                    }
+                  `}
+                >
+                  <FacebookIcon size="sm" />
+                  Facebook
+                </button>
+                <button
+                  onClick={() => setType(ContentType.LinkedIn)}
+                  className={`flex items-center justify-center gap-2 rounded-xl border px-4 py-3 transition
+                    ${
+                      type === ContentType.LinkedIn
+                        ? "bg-red-200/10 border-blue-100 text-blue-100"
+                        : "border-white/10 text-gray-400 hover:border-white/20"
+                    }
+                  `}
+                >
+                  <LinkedinIcon size="sm" />
+                  LinkedIn
+                </button>
               </div>
             </div>
 
-            {/* SUBMIT */}
             <Button
               onClick={addContent}
               variant="primary"

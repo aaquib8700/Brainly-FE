@@ -12,8 +12,8 @@ export default function Signin() {
     const navigate=useNavigate();
 
     async function signin(){
-        const username=usernameRef.current?.value;
-        const password=usernameRef.current?.value;
+        const username=usernameRef.current?.value || "";
+        const password=passwordRef.current?.value || "";
 
        const response= await axios.post(BACKEND_URL + "/api/v1/signin",{
                 username,
@@ -22,6 +22,10 @@ export default function Signin() {
         const jwt=response.data.token;
         localStorage.setItem("token",jwt)
         navigate("/dashboard"); 
+
+       if(usernameRef.current) usernameRef.current.value="";
+       if(passwordRef.current) {passwordRef.current.value = "";}
+
         }
 
 

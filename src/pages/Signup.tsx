@@ -12,15 +12,17 @@ export default function Signup() {
     const navigate=useNavigate();
 
     async function signup(){
-        const username=usernameRef.current?.value;
-        const password=usernameRef.current?.value;
+        const username=usernameRef.current?.value || "";
+        const password=usernameRef.current?.value || "";
 
         await axios.post(BACKEND_URL + "/api/v1/signup",{
                 username,
                 password
         })
         navigate("/signin");
-        alert("You have signed up !")
+        if(usernameRef.current) usernameRef.current.value="";
+        if(passwordRef.current) passwordRef.current.value="";
+        alert("You have signed up !");
         }
 
 
