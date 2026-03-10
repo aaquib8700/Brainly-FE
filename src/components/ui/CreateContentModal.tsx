@@ -23,7 +23,15 @@ interface CreateContentModalProps {
   onClose: () => void;
 }
 
-const CreateContentModal = ({ open, onClose }:CreateContentModalProps) => {
+const contentTypes = [
+  { value: ContentType.Youtube, label: "YouTube", icon: YoutubeIcon },
+  { value: ContentType.Twitter, label: "Twitter", icon: TwitterIcon },
+  { value: ContentType.Instagram, label: "Instagram", icon: Instagram },
+  { value: ContentType.Facebook, label: "Facebook", icon: FacebookIcon },
+  { value: ContentType.LinkedIn, label: "LinkedIn", icon: LinkedinIcon },
+];
+
+const CreateContentModal = ({ open, onClose }: CreateContentModalProps) => {
   const titleRef = useRef<HTMLInputElement>(null);
   const linkRef = useRef<HTMLInputElement>(null);
   const [type, setType] = useState(ContentType.Youtube);
@@ -35,11 +43,7 @@ const CreateContentModal = ({ open, onClose }:CreateContentModalProps) => {
     await axios.post(
       BACKEND_URL + "/api/v1/content",
       { title, link, type },
-      {
-        headers: {
-          Authorization: localStorage.getItem("token"),
-        },
-      }
+      { headers: { Authorization: localStorage.getItem("token") } }
     );
 
     onClose();
@@ -51,121 +55,75 @@ const CreateContentModal = ({ open, onClose }:CreateContentModalProps) => {
     <>
       <div
         onClick={onClose}
-        className="fixed inset-0 z-40 bg-black/60 backdrop-blur-sm"
+        className="fixed inset-0 z-[60] bg-slate-950/60 backdrop-blur-xl animate-fade-in"
       />
 
-      <div className="fixed inset-0 z-50 flex items-center justify-center">
-        <div className="w-full max-w-md rounded-2xl bg-gradient-to-b from-black/80 to-black/60 border border-white/10 p-6 shadow-2xl">
-          <div className="flex items-start justify-between">
+      <div className="fixed inset-0 z-[70] flex items-center justify-center p-6">
+        <div className="w-full max-w-xl bg-slate-900 border border-white/5 rounded-[48px] shadow-3xl p-12 animate-scale-in relative overflow-hidden backdrop-blur-3xl">
+          <div className="absolute top-0 right-0 w-[400px] h-[400px] bg-indigo-500/5 rounded-full blur-[100px] -mr-48 -mt-48 pointer-events-none" />
+
+          <div className="flex items-start justify-between mb-12 relative z-10">
             <div>
-              <h2 className="text-xl font-semibold text-white">
-                Add Content
+              <h2 className="text-3xl font-bold text-white tracking-tight uppercase mb-2">
+                Add Item
               </h2>
-              <p className="text-sm text-gray-400 mt-1">
-                Save a new piece of content to your brain
+              <p className="text-xs font-bold tracking-widest text-slate-500 uppercase">
+                Save a new link to your library
               </p>
             </div>
-
-                  <div  onClick={onClose} className="w-fit hover:bg-red-600 hover:text-white rounded-sm text-white font-extrabold">
-                    <CrossIcon />
-                  </div>
+            <button
+              onClick={onClose}
+              className="p-3 rounded-2xl bg-red-500/10 text-red-500 border border-red-500/20 hover:bg-red-500 hover:text-white hover:shadow-lg hover:shadow-red-500/20 transition-all cursor-pointer"
+            >
+              <CrossIcon size="md" />
+            </button>
           </div>
-          <div className="mt-6 space-y-5">
-            <div>
-              <label className="text-sm text-gray-400">Title</label>
-              <Input
-                ref={titleRef}
-                placeholder="Give it a memorable title"
-              />
+
+          <div className="space-y-10 relative z-10">
+            <div className="space-y-3">
+              <label className="block text-[10px] font-bold text-slate-500 uppercase tracking-widest px-6">
+                Name
+              </label>
+              <Input ref={titleRef} placeholder="Give your link a name..." />
             </div>
-            <div>
-              <label className="text-sm text-gray-400">Link</label>
-              <Input
-                ref={linkRef}
-                placeholder="Paste the URL here"
-              />
+
+            <div className="space-y-3">
+              <label className="block text-[10px] font-bold text-slate-500 uppercase tracking-widest px-6">
+                URL
+              </label>
+              <Input ref={linkRef} placeholder="Paste social link here..." />
             </div>
-            <div>
-              <label className="text-sm text-gray-400">Content Type</label>
 
-              <div className="mt-3 grid grid-cols-2 gap-3">
-                <button
-                  onClick={() => setType(ContentType.Youtube)}
-                  className={`flex items-center justify-center gap-2 rounded-xl border px-4 py-3 transition
-                    ${
-                      type === ContentType.Youtube
-                        ? "bg-red-500/10 border-red-500 text-red-500"
-                        : "border-white/10 text-gray-400 hover:border-white/20"
-                    }
-                  `}
-                >
-                  <YoutubeIcon size="sm" />
-                  YouTube
-                </button>
-                <button
-                  onClick={() => setType(ContentType.Twitter)}
-                  className={`flex items-center justify-center gap-2 rounded-xl border px-4 py-3 transition
-                    ${
-                      type === ContentType.Twitter
-                        ? "bg-blue-500/10 border-blue-500 text-blue-500"
-                        : "border-white/10 text-gray-400 hover:border-white/20"
-                    }
-                  `}
-                >
-                  <TwitterIcon size="sm" />
-                  Twitter
-                </button>
-
-                <button
-                  onClick={() => setType(ContentType.Instagram)}
-                  className={`flex items-center justify-center gap-2 rounded-xl border px-4 py-3 transition
-                    ${
-                      type === ContentType.Instagram
-                        ? "bg-pink-300/10 border-pink-300 text-pink-300"
-                        : "border-white/10 text-gray-400 hover:border-white/20"
-                    }
-                  `}
-                >
-                  <Instagram size="sm" />
-                  Instagram
-                </button>
-
-                <button
-                  onClick={() => setType(ContentType.Facebook)}
-                  className={`flex items-center justify-center gap-2 rounded-xl border px-4 py-3 transition
-                    ${
-                      type === ContentType.Facebook
-                        ? "bg-blue-300/10 border-blue-300 text-blue-300"
-                        : "border-white/10 text-gray-400 hover:border-white/20"
-                    }
-                  `}
-                >
-                  <FacebookIcon size="sm" />
-                  Facebook
-                </button>
-                <button
-                  onClick={() => setType(ContentType.LinkedIn)}
-                  className={`flex items-center justify-center gap-2 rounded-xl border px-4 py-3 transition
-                    ${
-                      type === ContentType.LinkedIn
-                        ? "bg-red-200/10 border-blue-100 text-blue-100"
-                        : "border-white/10 text-gray-400 hover:border-white/20"
-                    }
-                  `}
-                >
-                  <LinkedinIcon size="sm" />
-                  LinkedIn
-                </button>
+            <div className="space-y-4">
+              <label className="block text-[10px] font-bold text-slate-500 uppercase tracking-widest px-6">
+                Type
+              </label>
+              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3">
+                {contentTypes.map((ct) => (
+                  <button
+                    key={ct.value}
+                    onClick={() => setType(ct.value)}
+                    className={`flex flex-col items-center justify-center gap-3 rounded-[24px] border px-2 py-6 text-[9px] font-bold uppercase tracking-widest transition-all duration-300 ${type === ct.value
+                        ? "bg-white border-white text-indigo-600 shadow-2xl scale-105"
+                        : "border-white/5 text-slate-500 hover:border-white/10 hover:bg-white/5"
+                      }`}
+                  >
+                    <ct.icon size="sm" />
+                    <span className="mt-1">{ct.label}</span>
+                  </button>
+                ))}
               </div>
             </div>
 
-            <Button
-              onClick={addContent}
-              variant="primary"
-              size="md"
-              text="Add to Brain"
-              fullWidth
-            />
+            <div className="pt-6">
+              <Button
+                onClick={addContent}
+                variant="primary"
+                size="lg"
+                text="Save link →"
+                fullWidth
+              />
+            </div>
           </div>
         </div>
       </div>
