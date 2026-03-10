@@ -73,7 +73,7 @@ const CreateContentModal = ({ open, onClose }: CreateContentModalProps) => {
             </div>
             <button
               onClick={onClose}
-              className="p-3 rounded-2xl bg-red-500/10 text-red-500 border border-red-500/20 hover:bg-red-500 hover:text-white hover:shadow-lg hover:shadow-red-500/20 transition-all cursor-pointer"
+              className="p-2.5 rounded-2xl bg-red-500/10 text-red-500 border border-red-500/20 hover:bg-red-500 hover:text-white hover:shadow-lg hover:shadow-red-500/20 transition-all cursor-pointer"
             >
               <CrossIcon size="md" />
             </button>
@@ -104,8 +104,8 @@ const CreateContentModal = ({ open, onClose }: CreateContentModalProps) => {
                     key={ct.value}
                     onClick={() => setType(ct.value)}
                     className={`flex flex-col items-center justify-center gap-3 rounded-[24px] border px-2 py-6 text-[9px] font-bold uppercase tracking-widest transition-all duration-300 ${type === ct.value
-                        ? "bg-white border-white text-indigo-600 shadow-2xl scale-105"
-                        : "border-white/5 text-slate-500 hover:border-white/10 hover:bg-white/5"
+                      ? "bg-white border-white text-indigo-600 shadow-2xl scale-105"
+                      : "border-white/5 text-slate-500 hover:border-white/10 hover:bg-white/5"
                       }`}
                   >
                     <ct.icon size="sm" />
